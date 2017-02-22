@@ -1,0 +1,140 @@
+[
+	{
+		"content": {
+			"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
+		},
+		"marker": {
+			"position": {
+				"lat": -34.397,
+				"lng": 150.644
+			},
+			"icon": {
+				"default": "/img/markerDefault.png",
+				"active": "/img/markerDefault.png",
+				"size": {
+					"x": 20,
+					"y": 30
+				},
+				"centering": {
+					"x": 10,
+					"y": 30
+				}
+			}
+		}
+	},
+	{
+		"content": {
+			"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
+		},
+		"marker": {
+			"position": {
+				"lat": -34.597,
+				"lng": 150.644
+			},
+			"icon": {
+				"default": "/img/markerDefault.png",
+				"active": "/img/markerDefault.png",
+				"size": {
+					"x": 20,
+					"y": 30
+				},
+				"centering": {
+					"x": 10,
+					"y": 30
+				}
+			}
+		}
+	},
+	{
+		"content": {
+			"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
+		},
+		"marker": {
+			"position": {
+				"lat": -34.897,
+				"lng": 150.644
+			},
+			"icon": {
+				"default": "/img/markerDefault.png",
+				"active": "/img/markerDefault.png",
+				"size": {
+					"x": 20,
+					"y": 30
+				},
+				"centering": {
+					"x": 10,
+					"y": 30
+				}
+			}
+		}
+	},
+	{
+		"content": {
+			"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
+		},
+		"marker": {
+			"position": {
+				"lat": -33.997,
+				"lng": 150.644
+			},
+			"icon": {
+				"default": "/img/markerDefault.png",
+				"active": "/img/markerDefault.png",
+				"size": {
+					"x": 20,
+					"y": 30
+				},
+				"centering": {
+					"x": 10,
+					"y": 30
+				}
+			}
+		}
+	},
+	{
+		"content": {
+			"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
+		},
+		"marker": {
+			"position": {
+				"lat": -33.697,
+				"lng": 150.644
+			},
+			"icon": {
+				"default": "/img/markerDefault.png",
+				"active": "/img/markerDefault.png",
+				"size": {
+					"x": 20,
+					"y": 30
+				},
+				"centering": {
+					"x": 10,
+					"y": 30
+				}
+			}
+		}
+	},
+	{
+		"content": {
+			"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
+		},
+		"marker": {
+			"position": {
+				"lat": -33.397,
+				"lng": 150.644
+			},
+			"icon": {
+				"default": "/img/markerDefault.png",
+				"active": "/img/markerDefault.png",
+				"size": {
+					"x": 20,
+					"y": 30
+				},
+				"centering": {
+					"x": 10,
+					"y": 30
+				}
+			}
+		}
+	}
+]
