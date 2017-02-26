@@ -20,60 +20,56 @@ let map = new Map({
 		zoom: 8
 	},
 	markers: {
-		ajax: true,
-		file: 'data-file',
+		url: 'data-file',
+		// items: [
+		// 	{
+		// 		"content": {
+		// 			"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
+		// 		},
+		// 		"marker": {
+		// 			"position": {
+		// 				"lat": -34.397,
+		// 				"lng": 150.644
+		// 			},
+		// 			"icon": {
+		// 				"default": "/img/markerDefault.png",
+		// 				"active": "/img/markerActive.png",
+		// 				"size": {
+		// 					"x": 20,
+		// 					"y": 30
+		// 				},
+		// 				"centering": {
+		// 					"x": 10,
+		// 					"y": 30
+		// 				}
+		// 			}
+		// 		}
+		// 	},
+		// 	{
+		// 		"content": {
+		// 			"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
+		// 		},
+		// 		"marker": {
+		// 			"position": {
+		// 				"lat": -34.597,
+		// 				"lng": 150.644
+		// 			},
+		// 			"icon": {
+		// 				"default": "/img/markerDefault.png",
+		// 				"active": "/img/markerActive.png",
+		// 				"size": {
+		// 					"x": 20,
+		// 					"y": 30
+		// 				},
+		// 				"centering": {
+		// 					"x": 10,
+		// 					"y": 30
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// ]
 	}
-	// markers: {
-	// 	ajax: false,
-	// 	items: [
-	// 		{
-	// 			"content": {
-	// 				"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
-	// 			},
-	// 			"marker": {
-	// 				"position": {
-	// 					"lat": -34.397,
-	// 					"lng": 150.644
-	// 				},
-	// 				"icon": {
-	// 					"default": "/img/markerDefault.png",
-	// 					"active": "/img/markerDefault.png",
-	// 					"size": {
-	// 						"x": 20,
-	// 						"y": 30
-	// 					},
-	// 					"centering": {
-	// 						"x": 10,
-	// 						"y": 30
-	// 					}
-	// 				}
-	// 			}
-	// 		},
-	// 		{
-	// 			"content": {
-	// 				"title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, consequatur."
-	// 			},
-	// 			"marker": {
-	// 				"position": {
-	// 					"lat": -34.597,
-	// 					"lng": 150.644
-	// 				},
-	// 				"icon": {
-	// 					"default": "/img/markerDefault.png",
-	// 					"active": "/img/markerDefault.png",
-	// 					"size": {
-	// 						"x": 20,
-	// 						"y": 30
-	// 					},
-	// 					"centering": {
-	// 						"x": 10,
-	// 						"y": 30
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	]
-	// }
 });
 
 map.init();

@@ -30,8 +30,8 @@ export default (function() {
 			if (typeof props.markers != 'object') return console.error('Data must be an object!!!');
 			if (!Object.keys(props.markers).length) return console.error('Data must be a non-empty object!!!');
 
-			if (props.markers.ajax) {
-				if (!utils.checkPropsString(props.markers) && utils.checkPropsString(props.markers.file)) {
+			if (props.markers.url) {
+				if (!utils.checkPropsString(props.markers) && utils.checkPropsString(props.markers.url)) {
 					this._loadData((items) => {
 						let infobox = utils.checkPropsString(props.template)
 							? this._getTemplate()
@@ -39,7 +39,7 @@ export default (function() {
 						this._addItems(items, infobox);
 					});
 				}
-			} else {
+			} else if (!props.markers.url) {
 				let infobox = utils.checkPropsString(props.template)
 					? this._getTemplate()
 					: null;
@@ -56,7 +56,7 @@ export default (function() {
 		_loadData(callback) {
 			let props = this._props;
 
-			let path = this._container.getAttribute(props.markers.file);
+			let path = this._container.getAttribute(props.markers.url);
 			let xhr = new XMLHttpRequest();
 
 			xhr.open('GET', path, true);
@@ -85,22 +85,21 @@ export default (function() {
 
 				this._markers.push(marker);
 
-				if (infobox) {
+				if (infobox && this._props.infobox) {
 					let content = items[i].content;
 					let compiled = infobox(content);
-					let ib = this._createInfoBox(compiled, markerOptions);
+					let ib = this._createInfoBox(compiled, marker);
 
 					this._infoboxes.push(ib);
 					//toggle content on click
 					google.maps.event.addListener(marker, 'click', e => this._toggleInfobox(ib, marker));
-					google.maps.event.addListener(ib, 'domready', e => this._addEventOnCloseButton(ib, markerOptions));
+					google.maps.event.addListener(ib, 'domready', e => this._addEventOnCloseButton(ib, marker));
 				}
 
 			}
 
 			if (!this._props.onlyOneBox) return;
 			google.maps.event.addListener(this._map, 'click', e => {
-				console.log(e);
 				this._closeAllInfobox();
 			});
 		}
@@ -116,6 +115,7 @@ export default (function() {
 				button.addEventListener('click', e => {
 					e.preventDefault();
 					this._closeInfobox(ib);
+					this._closeMarker(marker);
 				}, false);
 			});
 		}
@@ -126,6 +126,7 @@ export default (function() {
 
 		_closeAllInfobox() {
 			this._infoboxes.forEach(infobox => this._closeInfobox(infobox));
+			this._closeMarkers();
 		}
 
 		_closeInfobox(item) {
@@ -139,11 +140,18 @@ export default (function() {
 		}
 
 		_toggleInfobox(item, marker) {
+			let activeIcon = marker.activeIcon;
+			let defaultIcon = marker.defaultIcon;
 			if (!item.isOpen) {
-				if (this._props.onlyOneBox) this._closeAllInfobox();
+				if (this._props.onlyOneBox) {
+					this._closeAllInfobox();
+					this._closeMarkers();
+				}
 				this._openInfobox(item, marker);
+				if (!!activeIcon && activeIcon.length) this._toggleMarker(marker, 'activeIcon');
 			} else {
 				this._closeInfobox(item);
+				if (!!activeIcon && activeIcon.length) this._toggleMarker(marker, 'defaultIcon');
 			}
 		}
 
@@ -153,19 +161,43 @@ export default (function() {
 
 		_createMarker(data) {
 			let icon = data.icon;
-			let markerIcon = utils.checkPropsString(icon)
-				? icon
-				: {
-					url: icon.default,
-					size: new google.maps.Size(icon.size.x, icon.size.y),
-					anchor: new google.maps.Point(icon.centering.x, icon.centering.y)
+			let size = icon.size;
+			let centering = icon.centering || {
+				x: 0,
+				y: 0
+			};
+			let iconStyles = {
+					url: icon.default || '',
+					scaledSize: new google.maps.Size(size.x, size.y),
+					anchor: new google.maps.Point(centering.x, centering.y)
 				};
 
-			return new google.maps.Marker({
+			let marker = new google.maps.Marker({
 				map: this._map,
 				position: data.position,
-				icon: markerIcon
+				defaultIcon: data.icon.default || '',
+				activeIcon: data.icon.active || '',
+				iconSize: size,
+				iconStyles: iconStyles
 			});
+
+			if (icon.default) marker.setIcon(iconStyles);
+
+			return marker;
+		}
+
+		_closeMarkers() {
+			this._markers.forEach(marker => this._closeMarker(marker));
+		}
+
+		_closeMarker(marker) {
+			marker.setIcon(marker.iconStyles);
+		}
+
+		_toggleMarker(marker, img) {
+			let icon = JSON.parse(JSON.stringify(marker.iconStyles));
+			icon.url = marker[img];
+			marker.setIcon(icon)
 		}
 
 		//*******************************************
@@ -179,7 +211,7 @@ export default (function() {
 			let width = style.width || this._defaultWidth;
 			style.width = width;
 
-			let markerSize = marker.icon.size;
+			let markerSize = marker.iconSize;
 
 			this._offsetX = markerSize.x;
 			this._offsetY = markerSize.y;
