@@ -1,13 +1,14 @@
 import {template} from 'underscore';
 import InfoBox from 'google-maps-infobox';
 
-const utils = {
-	checkPropsString(props) {
-		return (typeof props == 'string' && props.length);
-	}
-};
 
 export default (function() {
+
+	const utils = {
+		checkPropsString(props) {
+			return (typeof props == 'string' && props.length);
+		}
+	};
 
 	class Map {
 
